@@ -14,7 +14,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     @Query("SELECT m FROM Movie m WHERE LOWER(m.title) LIKE LOWER(CONCAT('%',:keyword,'%') ) " +
             "OR LOWER(m.releaseDate) LIKE LOWER(CONCAT('%',:keyword,'%') )" +
             "OR LOWER(m.type) LIKE LOWER(CONCAT('%',:keyword,'%') )")
-    Optional<List<Movie>> searchMovies(String keyword);
+    List<Movie> searchMovies(String keyword);
 
     @Query("SELECT m FROM Movie m ORDER BY (m.releaseDate) DESC")
     List<Movie> getAllMoviesSortedByTime();

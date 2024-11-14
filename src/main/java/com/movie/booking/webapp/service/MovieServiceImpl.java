@@ -59,8 +59,10 @@ public class MovieServiceImpl implements MovieService{
 
     @Override
     public List<Movie> searchMovie(String keyword) {
-        return movieRepository.searchMovies(keyword).orElseThrow(
-                () -> new RuntimeException("Movie not found")
-        );
+        List<Movie> movies = movieRepository.searchMovies(keyword);
+        if(movies.isEmpty()){
+            throw new RuntimeException("No movies found");
+        }
+        return movies;
     }
 }
