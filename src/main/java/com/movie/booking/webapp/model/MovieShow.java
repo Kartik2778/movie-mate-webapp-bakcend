@@ -43,7 +43,7 @@ public class MovieShow {
     private List<ShowSeat> showSeats = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "movieShow")
+    @OneToMany(cascade = CascadeType.PERSIST,mappedBy = "movieShow")
     private List<Booking> bookings = new ArrayList<>();
 
     @ManyToOne

@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class MovieShowServiceImpl implements MovieShowService{
 
+    private final BookingRepository bookingRepository;
     private MovieShowRepository movieShowRepository;
     private CinemaHallRepository cinemaHallRepository;
     private MovieRepository movieRepository;
@@ -76,6 +77,14 @@ public class MovieShowServiceImpl implements MovieShowService{
         MovieShow movieShow = movieShowRepository.findById(movieShowId).orElseThrow(
                 () -> new RuntimeException("MovieShow with id "+movieShowId+" not found")
         );
+        List<Booking> bookings = movieShow.getBookings();
+        for(Booking booking : bookings){
+           Booking temp = bookingRepository.findById(booking.getBooking_id()).orElseThrow(
+                   () ->  new RuntimeException("Booking not found")
+           );
+           temp.setStatus("CANCELLED");
+           bookingRepository.save(temp);
+        }
         movieShowRepository.delete(movieShow);
     }
 

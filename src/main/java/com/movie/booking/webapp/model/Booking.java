@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -20,11 +21,14 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long booking_id;
 
+    private String razorpayOrderId;
+
+    @CreationTimestamp
     private LocalDateTime bookingDate;
 
     private int numberOfSeats;
 
-    private BigDecimal totalPrice;
+    private Long totalPrice;
 
     private String status;
 
